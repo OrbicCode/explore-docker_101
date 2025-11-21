@@ -40,7 +40,6 @@ async function seedDB() {
     }
 
     const csvText = await response.text();
-    let records = [];
     const parser = parse(csvText, {
       delimiter: ',',
       columns: true,
