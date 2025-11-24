@@ -1,7 +1,7 @@
 import pool from './db/dbConfig.js';
 import { parse } from 'csv-parse';
 
-async function seedDB() {
+async function seedDb() {
   try {
     await pool.query(`
   CREATE TABLE IF NOT EXISTS pokemon_data (
@@ -75,4 +75,4 @@ async function seedDB() {
   }
 }
 
-seedDB();
+seedDb();
