@@ -9,4 +9,8 @@ app.use(cors());
 
 app.use('/pokemon', pokemonRoutes);
 
+app.get('/', (req, res) => {
+  res.json({ message: '🐳 Docker Pokémon API is running!' });
+});
+
 app.listen(PORT, () => console.log(`server listening on port: ${PORT}`));

@@ -3,19 +3,12 @@ services:
     image: postgres:17-alpine
     restart: unless-stopped
     environment:
-      - POSTGRES_USER: postgres
+      POSTGRES_USER: postgres
       # ggignore
-      - POSTGRES_PASSWORD: postgres
-      - POSTGRES_DB: pokemon
-    ports:
-      - 5432:5432
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: pokemon
     volumes:
       - db_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ['CMD', 'pg_isready', '-U', 'postgres']
-      interval: 5s
-      timeout: 5s
-      retries: 5
 
   backend:
     build: ./backend
@@ -24,15 +17,14 @@ services:
     environment:
       - DATABASE_URL=postgres://postgres:postgres@db:5432/pokemon
     depends_on:
-      db:
-        condition: service_healthy
+      - db
 
-  seedDb:
-    build: ./backend
-    command: node seedDb.js
+  frontend:
+    build: ./frontend
+    ports:
+      - 5173:5173
     depends_on:
-      db:
-        condition: service_healthy
+      - backend
 
 volumes:
   db_data:
