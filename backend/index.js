@@ -1,10 +1,9 @@
 import express from 'express';
+import { pokemonRoutes } from './routes.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.get('/', (req, res) => {
-  res.json({ message: "OOOOOOOO, looks like I'm Working 🐳⛴️⚓️" });
-});
+app.use('/pokemon', pokemonRoutes);
 
 app.listen(PORT, () => console.log(`server listening on port: ${PORT}`));
